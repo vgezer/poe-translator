@@ -1,0 +1,17 @@
+CREATE TABLE IF NOT EXISTS `history` (
+  `id` int(11) NOT NULL,
+  `file` text COLLATE utf8_turkish_ci NOT NULL,
+  `stringid` int(11) NOT NULL,
+  `text` text COLLATE utf8_turkish_ci NOT NULL,
+  `date` datetime NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=76 DEFAULT CHARSET=utf8 COLLATE=utf8_turkish_ci;
+
+--
+-- Dökümü yapılmış tablolar için indeksler
+--
+
+--
+-- Tablo için indeksler `history`
+--
+ALTER TABLE `history`
+  ADD PRIMARY KEY (`id`);
