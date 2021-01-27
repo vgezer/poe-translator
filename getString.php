@@ -95,7 +95,7 @@ function translateOnGoogle($text) {
 	
 $url = "https://translate.google.com/m?hl=$to&sl=$from&q=" . urlencode($text);
 $lines_string = file_get_contents($url);
-$translation_begin = substr($lines_string, strpos($lines_string, 'class="t0">')+11);
+$translation_begin = substr($lines_string, strpos($lines_string, 'result-container">')+11);
 $translation_end = strpos($translation_begin, "<");
 $translation = substr($translation_begin, 0, $translation_end);
 
