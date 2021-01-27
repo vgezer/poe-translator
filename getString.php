@@ -8,7 +8,7 @@ $dbname = "poeHistory";
 $rootDir = "tyranny/text/"; // relative path to: text directory.
 $from = "en"; // Original string language
 $to = "tr"; // Target string language
-$enableHistory = true; // requires database, set to false to disable history.
+$enableHistory = false; // requires database, set to false to disable history.
 
 
 // DON'T TOUCH BELOW
@@ -39,10 +39,9 @@ function listFolderFiles($dir){
         if(strstr($ff, ".stringtable")) {
 			echo "<li><a href='".basename(__FILE__)."?file=".$dir."/".$ff."'>".$ff."</a>";
 		}
-		else {
-			echo "<li><a href='".basename(__FILE__)."?activeDir=".$dir."/".$ff."'>".$ff."</a>";
-		}
+		//echo "dir " . $dir.'/'.$ff;
         if(is_dir($dir.'/'.$ff)) {
+			echo "<li><a href='".basename(__FILE__)."?activeDir=".$dir."/".$ff."'>".$ff."</a>";
 			listFolderFiles($dir.'/'.$ff);
 		}
         echo '</li>';
@@ -93,14 +92,14 @@ function translateOnGoogle($text) {
 	global $from;
 	global $to;
 	
-$url = "https://translate.google.com/m?hl=$to&sl=$from&q=" . urlencode($text);
-$lines_string = file_get_contents($url);
-$translation_begin = substr($lines_string, strpos($lines_string, 'result-container">')+11);
-$translation_end = strpos($translation_begin, "<");
-$translation = substr($translation_begin, 0, $translation_end);
+	$url = "https://translate.google.com/m?hl=$to&sl=$from&q=" . urlencode($text);
+	$lines_string = file_get_contents($url);
+	$translation_begin = substr($lines_string, strpos($lines_string, 'result-container">')+11);
+	$translation_end = strpos($translation_begin, "<");
+	$translation = substr($translation_begin, 0, $translation_end);
 
-$translation = mb_convert_encoding($translation, 'UTF-8', "ISO-8859-9");
-return $translation;
+	$translation = mb_convert_encoding($translation, 'UTF-8', "ISO-8859-9");
+	return $translation;
 
 }
 
